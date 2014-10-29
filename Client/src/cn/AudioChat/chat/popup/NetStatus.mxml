@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow creationComplete="init()" xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="452" height="234" title="Net Status" color="#0B333C" backgroundColor="#0B333C" backgroundAlpha="0.23">
+	<mx:Script>
+		<![CDATA[
+		
+			import cn.AudioChat.chat.*;//import cn.AudioChat.chat.Face
+			import mx.controls.Alert;
+			import mx.managers.PopUpManager;
+			import mx.controls.TextArea;
+			import cn.AudioChat.chat.Protocol;
+			
+			import cn.AudioChat.chat.Action;
+			import cn.AudioChat.chat.Face;
+			
+			public function init():void
+			{
+				NumOfClient.text = Face.num.toString();
+				ServerDomain.text = Connector.getServerDomain();
+				ServerPort.text = Connector.getServerPort();
+			}
+			
+			private function onCancelClick():void
+			{
+				PopUpManager.removePopUp(this);
+			}
+		]]>
+	</mx:Script>
+	<mx:Button x="348" y="171" label="Cancel" fontSize="11" width="74" click="onCancelClick()"/>
+	<mx:TabNavigator x="0" y="1" width="432" height="168">
+		<mx:Canvas label="Server" width="100%" height="100%">
+			<mx:Label x="10" y="19" text="Num of Client:" width="116" fontSize="13" fontWeight="bold"/>
+			<mx:Label x="10" y="49" text="Server Domain:" width="150" fontSize="13" fontWeight="bold"/>
+			<mx:Label x="10" y="79" text="Server Port：" fontSize="13" fontWeight="bold"/>
+			<mx:Label x="134" y="19" width="271" id="NumOfClient"/>
+			<mx:Label x="134" y="49" width="271" id="ServerDomain"/>
+			<mx:Label x="134" y="79" width="271" id="ServerPort"/>
+		</mx:Canvas>
+		<mx:Canvas label="Client" width="100%" height="100%">
+			<mx:Label x="10" y="19" text="Nick_Name:" width="116" fontSize="13" fontWeight="bold"/>
+			<mx:Label x="10" y="49" text="Client IP:" width="94" fontSize="13" fontWeight="bold"/>
+			<mx:Label x="10" y="79" text="Client Port：" fontSize="13" fontWeight="bold"/>
+			<mx:Label x="134" y="19" width="271" id="NickName"/>
+			<mx:Label x="134" y="49" width="271" id="ClientIP"/>
+			<mx:Label x="134" y="79" width="271" id="ClientPort"/>
+		</mx:Canvas>
+	</mx:TabNavigator>
+</mx:TitleWindow>

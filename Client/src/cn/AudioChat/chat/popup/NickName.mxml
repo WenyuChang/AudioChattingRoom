@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow initialize="init()"  xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="202" height="104" title="Change Nick_Name" color="#0B333C">
+	<mx:TextInput id="nickname" x="72" y="10" width="106" />
+	<mx:Label x="0" y="13" text="Nick_Name：" fontSize="11"/>
+	<mx:Button x="12" y="42" label="Commit" click="onYesClick()" fontSize="11" width="74"/>
+	<mx:Script>
+		<![CDATA[
+			import mx.managers.PopUpManager;
+			import mx.controls.TextArea;
+			import cn.AudioChat.chat.Protocol;
+			import mx.controls.Alert;
+			private var protocol:Protocol;
+			private var msgArea:TextArea;
+			
+			public function init():void
+			{
+				nickname.addEventListener(KeyboardEvent.KEY_DOWN,onInputEnter);
+			}
+			
+			public function setMsgArea(msgArea:TextArea):void
+			{
+				this.msgArea=msgArea;
+			}
+			public function setProtocol(protocol:Protocol):void
+			{
+				this.protocol=protocol;
+			}
+			private function onYesClick():void
+			{
+				if(!(/\S+/).test(nickname.text))
+				{
+			       Alert.show("Please enter the Nick_Name!!");
+			       return;
+				}
+				else if(nickname.text.length>7)
+				{
+				   Alert.show("The nickname length cannot surpass 7 figures!!Please re-try");
+				   return;
+				}
+				this.protocol.changeNickname(nickname.text);
+				this.msgArea.htmlText+="(System_News):Is sending out the change nickname request to the system...<br />";
+				PopUpManager.removePopUp(this);
+			}
+			
+			private function onCancelClick():void
+			{
+				PopUpManager.removePopUp(this);
+			}
+			public function onInputEnter(event:KeyboardEvent):void 
+			{
+			//当用户对输入框按回车时，触发发送事件
+				if (event.keyCode==13) {
+					this.onYesClick();
+				}
+			}
+		]]>
+	</mx:Script>
+	<mx:Button x="104" y="42" label="Cancel" click="onCancelClick()" fontSize="11" width="74"/>
+</mx:TitleWindow>

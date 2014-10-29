@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application applicationComplete="myInit()" xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" cornerRadius="10" backgroundAlpha="0" width="760" height="630" backgroundColor="#FFFFFF">
+	<mx:states>
+		<mx:State name="File_Send">
+			<mx:SetProperty target="{userList}" name="height" value="280.07578"/>
+			<mx:AddChild relativeTo="{panel2}" position="lastChild">
+				<mx:Panel x="-0.05" y="287.6" width="185" height="182.34848" layout="absolute" title="File_Send" fontSize="11">
+					<mx:ProgressBar x="9.05" y="123.4" width="152.80304" height="28.712122" id="File_Progres" themeColor="#F20D7A" minimum="0" visible="true" maximum="100" label="CurrentProgress 0%" 
+            direction="right" mode="manual"/>
+					<mx:Label x="0" y="-7.1054274E-15" text="User_IP :" width="77.72727" height="22.045454" fontWeight="bold"/>
+					<mx:Label x="9" y="22" text="user ip" width="152.95454" height="21.969696" id="file_user_ip"/>
+					<mx:Label x="-0.05" y="51.65" text="File_Locate :" fontWeight="bold" width="120.83333" height="21.969696"/>
+					<mx:Button x="27.05" y="81.15" label="Browse" width="116.89394" height="21.969696" textAlign="center" fontWeight="normal" fontSize="11" click="fileBrowse()"/>
+				</mx:Panel>
+			</mx:AddChild>
+			<mx:SetProperty target="{panel1}" name="alpha" value="0.5"/>
+			<mx:SetProperty target="{inputPanel}" name="alpha" value="0.5"/>
+			
+			
+		</mx:State>
+
+	</mx:states>
+	
+	<mx:Script>
+	<![CDATA[
+	//ActionScript 语句所写的初始代码
+		import mx.controls.Alert;
+		import cn.AudioChat.chat.*;//import cn.humanmonth.chat.Face
+		import mx.core.IUITextField;//import cn.humanmonth.chat.Chat;
+		import flash.external.ExternalInterface;
+		
+		import cn.AudioChat.chat.popup.NetStatus;
+		import flash.display.DisplayObject;
+		import flash.events.DataEvent;
+		import flash.events.Event;
+		import flash.events.IOErrorEvent;
+		import flash.events.KeyboardEvent;
+		import flash.events.MouseEvent;
+		import flash.media.Sound;
+		import mx.core.Application;
+		import mx.managers.PopUpManager;
+		
+		//changwy
+		public function myInit():void
+		{
+			var face:Face=new Face(myIn,msg,userList,borderPane,sendButton,inputPanel);
+		    var chat:Chat=new Chat(face); 
+			myIn.setFocus();
+		}
+		public function clear_area():void
+		{
+			myIn.text="";
+		}
+		public function netStatus():void
+		{
+			var netStat:NetStatus=NetStatus(PopUpManager.createPopUp(DisplayObject(Application.application),NetStatus,true));
+		}
+		
+		////用于数据传送
+		public function fileBrowse():void
+		{
+			//file_user_ip.text = get_file_Send_IP();
+      		var myfileref:FileReferenceList = new FileReferenceList();
+     		myfileref.browse();
+   		}
+   		
+   		public function get_file_Send_IP():String
+   		{
+   		
+   			/* var selected_item:Object;
+   			selected_item = ()userList.selectedItem;
+   			List(event.target).selectedItem */
+   			return "";
+   		}
+
+	]]>
+</mx:Script>
+
+<!--音频聊天系统的主界面UI-->
+<mx:Style source="css/main.css" />
+<mx:Panel id="borderPane" x="9.1" y="52.55" alpha="0.56" styleName="IRCBorder" title="Audio Chat System" borderColor="#0B333C" width="741.8182" height="568.3334">
+	<mx:HDividedBox width="719.92426" height="517.19696" id="hdividedbox1">
+		<mx:VDividedBox height="507.95453" width="510.75757" id="vdividedbox1" alpha="1.0">
+			<mx:Panel width="510.75757" height="358.0303" layout="absolute" title="ChatArea" color="#0B333C" borderColor="#0B333C" id="panel1">
+				<mx:TextArea id="msg" width="495.98486" height="327.87878" wordWrap="true"  y="0" editable="false"/>
+			</mx:Panel>
+			<mx:Panel id="inputPanel" width="510.75757" height="138.93939" layout="absolute" title="Text Input" color="#041417" borderColor="#010506" alpha="1.0">
+					<mx:TextInput id="myIn" width="100%" height="72" toolTip="Enter and Send"/>
+					<mx:Button label="clear" id="clear_btn" click="clear_area()" x="351.7" y="77.85" fontSize="11" fontWeight="bold" color="#0B333C" width="54"/>
+					<mx:Button id="sendButton" label="Send" x="431.9" y="77.9" fontSize="11" color="#0B333C" width="55"/>
+					<mx:Button label="AudioChat" id="audioChat" width="98" height="22.045454" x="226.75" y="77.85" color="#0B333C" fontSize="11"/>
+			</mx:Panel>
+		</mx:VDividedBox>
+		<mx:Panel width="624.8485" height="500" layout="absolute" title="Hall Member " color="#0B333C" borderColor="#0B333C" id="panel2">
+			<mx:List id="userList" width="185" height="472.57574" borderColor="#0B333C" y="0" x="-0.05" change=""></mx:List>
+		</mx:Panel>
+	</mx:HDividedBox>
+	</mx:Panel>
+	<mx:ApplicationControlBar x="9.05" y="9.1" dock="false" width="741.8939" fillAlphas="[1.0, 0.4]" fillColors="[#0B333C, #0B333C]" height="35" id="applicationcontrolbar1">
+		<mx:LinkButton label="Chat State" fontSize="11" id="chatstate" click="this.currentState=''" color="#F1E908"/>
+		<mx:VRule width="2" height="24"/>
+		<mx:LinkButton label="Network Status" id="networkStatus" fontSize="11" enabled="true" color="#F1E908" click="netStatus()"/>
+		<mx:VRule width="2" height="24"/>
+		<mx:LinkButton label="Send File" fontSize="11" color="#F1E908" click="currentState = 'File_Send';" id="File_send"/>
+		<mx:VRule width="2" height="24"/>
+
+	</mx:ApplicationControlBar>
+</mx:Application>

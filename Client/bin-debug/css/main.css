@@ -1,0 +1,108 @@
+/* CSS file */
+Application
+{
+	backgroundGradientAlphas: 1.0, 1.0;
+	backgroundGradientColors: #FFFFFF, #FFFFFF;
+}
+ToolTip
+{
+	backgroundAlpha: 0.91;
+	fontSize: 13;
+}
+TitleWindow
+{
+	controlBarStyleName: titleWindowControlBar;
+	titleStyleName: titleWindowTitle;
+}
+
+
+Panel
+{
+	borderColor: #000000;
+	fontSize: 15;
+	fontWeight: normal;
+	borderThicknessLeft: 7;
+	borderThicknessRight: 7;
+	borderThicknessTop: -1;
+	cornerRadius: -1;
+	borderAlpha: 0.53;
+	color: #000000;
+	headerHeight: 24;
+	controlBarStyleName: panelControlBar;
+	titleStyleName: panelTitle;
+	roundedBottomCorners: false;
+}
+Panel.IRCBorder
+{
+	borderAlpha: 0.96;
+	roundedBottomCorners: true;
+	cornerRadius: 10;
+	titleStyleName: panelTitle2;
+	statusStyleName: panelStatus;
+	controlBarStyleName: panelControlBar;
+}
+
+TextArea
+{
+	fontSize: 12;
+	fontStyle: normal;
+	fontWeight: normal;
+}
+TextInput
+{
+	fontWeight: normal;
+	fontSize: 12;
+}
+List
+{
+	fontWeight: normal;
+	fontSize: 12;
+}
+Button
+{
+	fontSize: 13;
+	color: #000000;
+	paddingLeft: 0;
+	paddingRight: 0;
+	paddingTop: 0;
+	paddingBottom: 0;
+}
+Label
+{
+	fontSize: 13;
+	color: #000000;
+}
+HDividedBox
+{
+	borderThickness: 0;
+}
+.panelControlBar
+{
+	color: #000000;
+}
+.panelTitle
+{
+	color: #000000;
+	fontStyle: normal;
+	fontSize: 14;
+	fontWeight: normal;
+}
+.panelTitle2
+{
+	color: #FFFFFF;
+	fontStyle: normal;
+	fontSize: 18;
+	fontWeight: bold;
+}
+.panelStatus
+{
+	color: #FFFFFF;
+}
+.titleWindowControlBar
+{
+	color: #000000;
+}
+.titleWindowTitle
+{
+	color: #FFFEFE;
+}
